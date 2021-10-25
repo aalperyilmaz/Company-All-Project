@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Kayıt</title>
+
+</head>
+<body>
+<th:block layout:fragment="content" >
+
+  <div class="pusher">
+    <div class="main-content">
+
+      <div class="ui container">
+
+
+<!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+          <div class="ui hidden divider"></div>
+          <form method="post"   action="/registers/add" class="ui form" th:object="${registerProp}">
+              <h4 class="ui dividing header">Kullanıcı&Şirket Bilgileri</h4>
+              <div class="field">
+                  <label>Ad-Soyad-Email</label>
+                  <div class="two fields">
+                      <div class="field" >
+                          <input type="text" name="firstName" placeholder="First Name"/>
+                          <div class="ui red message" th:if="${ #fields.hasErrors('firstName') }" th:errors="*{firstName}"></div>
+
+                      </div>
+                      <div class="field" >
+                          <input type="text" name="lastName" placeholder="Last Name"/>
+                          <div class="ui red message" th:if="${ #fields.hasErrors('lastName') }" th:errors="*{lastName}"></div>
+                      </div>
+                      <div class="field" >
+                          <input type="email" name="email" placeholder="E-mail"/>
+                          <div class="ui red message" th:if="${ #fields.hasErrors('email') }" th:errors="*{email}"></div>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="ui form">
+
+                  <div class="fields">
+                      <div class="field">
+                          <label>Password</label>
+                          <input type="password" name="password">
+                          <div class="ui red message" th:if="${ #fields.hasErrors('password') }" th:errors="*{password}"></div>
+
+                      </div>
+                  </div>
+                  <div class="equal width fields" >
+
+                      <div class="field">
+                          <label>Sirket Adi</label>
+                          <input type="text" name="companyName" placeholder="Şirket Adı"/>
+                          <div class="ui red message"  th:if="${ #fields.hasErrors('companyName') }" th:errors="*{companyName}"></div>
+
+                      </div>
+                      <div class="field">
+                          <label>Sirket Adresi</label>
+                          <input type="text" name="companyAddress" placeholder="Adres"/>
+                          <div class="ui red message" th:if="${ #fields.hasErrors('companyAddress') }" th:errors="*{companyAddress}"></div>
+
+                      </div>
+                      <div class="field">
+                          <label>Company Latitude</label>
+                          <input type="text" name="companyLatitude" placeholder="konum"/>
+                      </div>
+                  </div>
+                  <div class="equal width fields">
+
+                      <div class="field" >
+                          <label>Sirket Telefonu</label>
+                          <input type="text" name="companyTel" placeholder="Telefon"/>
+                          <div class="ui red message" th:if="${ #fields.hasErrors('companyTel') }" th:errors="*{companyTel}"></div>
+
+                      </div>
+                      <div class="field">
+                          <label>Sektörü</label>
+                          <input type="text" name="companySector" placeholder="Sektör"/>
+                      </div>
+                      <div class="field">
+                          <label>Company Longitude</label>
+                          <input type="text" name="companyLongitude" placeholder="First Name">
+                      </div>
+                  </div>
+                  <button class="ui primary button">
+                      Save
+                  </button>
+              </div>
+          </form>
+<!--          İçerik ekleme ve filtreleme Başlangıç -->
+
+</div>
+</div>
+</div>
+
+</th:block>
+
+</body>
+</html>

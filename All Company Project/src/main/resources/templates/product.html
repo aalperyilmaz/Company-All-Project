@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Galeri</title>
+
+</head>
+<body>
+<th:block layout:fragment="content" >
+
+  <div class="pusher">
+    <div class="main-content">
+
+      <div class="ui container">
+
+
+<!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+          <div class="ui hidden divider"></div>
+
+
+
+<!--          İçerik ekleme ve filtreleme Başlangıç -->
+       <div class="row">
+
+           <button  onclick="fnc2()" class="ui button yellow create_btn" type="button" id="test">Kategori Ekle</button>
+           <button  onclick="fnc()" class="ui button yellow create_btn" type="button" id="tests">Alt kategori Ekle</button>
+
+       </div>
+
+<!--          İçerik ekleme ve filtreleme Bitiş-->
+          <div class="ui hidden divider"></div>
+          <form method="post" enctype="multipart/form-data" action="/product/add" th:object="${product}">
+          <div class="ui form">
+              <div class="three fields" >
+                  <div class="field">
+                      <label>Ürün Adı</label>
+                      <input type="text"  name="productName" placeholder="">
+                      <div class="ui red message" th:if="${ #fields.hasErrors('productName') }" th:errors="*{productName}"></div>
+
+                  </div>
+                  <div class="field">
+                      <label>Ürün kısa yorum</label>
+                      <input type="text" name="productShortComment" placeholder="">
+                  </div>
+
+              </div>
+          </div>
+              <div class="ui form">
+                  <div class="three fields">
+                      <div class="field">
+                          <label>Ürün fiyatı</label>
+                          <input type="number" name="productPrice" placeholder="">
+                      </div>
+                      <div class="field">
+                          <label>Ürün türü</label>
+                          <select  name="productType"  class="ui dropdown">
+                              <option value="1">Satılık </option>
+                              <option value="2">Kiralık</option>
+                          </select>
+                      </div>
+                      <div class="field">
+                          <label>Adres</label>
+                          <input type="text" name="productAddress" placeholder=" ">
+                      </div>
+                  </div>
+              </div>
+              <div class="ui form">
+                  <div class="three fields">
+                      <div class="field">
+                          <label>Konum Longitude</label>
+                          <input type="number" name="productLongitude" placeholder="">
+                      </div>
+                      <div class="field">
+                          <label>Konum Latitude</label>
+                          <input type="number" name="productLatitude" placeholder="">
+                      </div>
+                      <div class="field">
+                          <label>Kampanya Durumu</label>
+                          <select  name="productCampaingStatus"  class="ui dropdown">
+                              <option value="1">Satılık </option>
+                              <option value="2">Kiralık</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="ui form">
+                  <div class="three fields">
+                      <div class="field">
+                          <label>Kampanya adı</label>
+                          <input type="text" name="productCampaingName" placeholder="">
+                      </div>
+                      <div class="field">
+                          <label>Kampanya Yorum</label>
+                          <input type="text" name="productCampaingComment" placeholder="">
+                      </div>
+                      <div class="field">
+                          <label>Resim</label>
+                          <input type="file"  name="imageName" multiple="multiple" >
+                      </div>
+
+                  </div>
+              </div>
+              <div class="ui form">
+                  <div class="three fields">
+                      <div class="field">
+                          <label>Ürün yorum </label>
+                          <textarea type="text" name="productLongComment" placeholder=""></textarea>
+                      </div>
+                      <div class="field">
+                          <label>Kategoriler</label>
+                          <select   name="categories" multiple="" class="ui fluid dropdown">
+                              <option th:each="item, iter : ${categories}" th:value="${item.getCategoryName()}" th:text="${item.getCategoryName()}" >Skills</option>
+                          </select>
+
+                      </div>
+                      <div class="field">
+                          <label>Alt Kategoriler</label>
+                          <select   name="subCategory" multiple="" class="ui fluid dropdown">
+                              <option th:each="item, iter : ${subcategories}" th:value="${item.getSubCategoryName()}" th:text="${item.getSubCategoryName()}">Skills</option>
+
+                          </select>
+                      </div>
+                  </div>
+              </div>
+
+<button type="submit">GNDER</button>
+
+          </form>
+<!--          Pagination ve arama başlangıç-->
+          <div class="ui stackable ten column grid">
+              <div class="column">
+
+              </div>
+
+              <div class="column">
+
+              </div>
+
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column">
+
+                  </div>
+
+              </div>
+          </div>
+<!--          Pagination ve arama bitiş-->
+
+
+          <!--- Modal --->
+
+          <div class="ui small  modal test" id="modalshow">
+
+                  <div class="header">Kategori</div>
+              <div class="content">
+
+                  <form class="ui form">
+
+                      <div class="field">
+                          <label>Last Name</label>
+                          <input type="text" name="categoryName" placeholder="Last Name">
+                      </div>
+
+
+                  </form>
+
+              </div>
+
+                  <div class="actions">
+                      <button class="ui button" type="submit">Submit</button>
+                      <button class="ui cancel button">Cancel</button>
+                  </div>
+
+          </div>
+
+<!--TESTSSSS-->
+          <div class="ui modal tests">
+              <div class="header"> Alt Kategori</div>
+              <div class="content">
+                  <form class="ui form">
+
+                      <div class="field">
+                          <label>Last Name</label>
+                          <input type="text" name="subCategoryName" placeholder="Last Name">
+                      </div>
+
+
+                  </form>
+
+              </div>
+              <div class="actions">
+                  <button class="ui button" type="submit">Submit</button>
+                  <button class="ui cancel button">Cancel</button>
+              </div>
+          </div>
+
+
+          <div class="ui modal duzenle">
+              <i class="close icon"></i>
+              <form method="POST" id="duzenle" >
+                  <div class="ui form">
+                      <div class="ui hidden divider"></div>
+                      <div class="field">
+                          <label>Başlık</label>
+                          <input id="başlık" type="text" name="announcementTitle" placeholder="Başlık">
+                      </div>
+                      <div class="ui hidden divider"></div>
+                      <div class="field">
+                          <label>Yorum</label>
+                          <textarea type="text" id="yorum" name="announcementComment" placeholder="Yorum"></textarea>
+                      </div>
+                      <div class="ui hidden divider"></div>
+                      <div class="field ">
+                          <label>Tarih</label>
+                          <input id="date" type="date" name="announcementDate" >
+                      </div>
+                  </div>
+                  <div class="ui hidden divider"></div>
+
+                  <div class="actions">
+                      <div class="ui black deny button">
+                          Kapat
+                      </div>
+                      <button type="submit" class="ui positive right labeled icon button">
+                          Gönder
+                          <i class="checkmark icon"></i>
+                      </button>
+
+                  </div>
+              </form>
+          </div>
+
+
+      </div>
+ </div>
+
+    </div>
+
+    <script>
+        function fnc(){
+        $(function(){
+            $("#tests").click(function(){
+                $(".tests").modal('show');
+            });
+            $(".tests").modal({
+                closable: true
+            });
+        });
+        }
+
+        function fnc2(){
+            $(function(){
+                $("#test").click(function(){
+                    $(".test").modal('show');
+                });
+                $(".tests").modal({
+                    closable: true
+                });
+            });
+        }
+
+
+    </script>
+
+    <script th:src="@{/sitejs/gallery.js}" ></script>
+
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Şifre Değiştirme</title>
+
+</head>
+<body>
+<th:block layout:fragment="content" >
+
+  <div class="pusher">
+    <div class="main-content">
+
+      <div class="ui container">
+
+
+<!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+          <div class="ui hidden divider"></div>
+          <div class="ui hidden divider"></div>
+          <div class="ui hidden divider"></div>
+          <div th:if="${passConfirm != null }"  class="ui negative message">
+              <i class="close icon"></i>
+              <div class="header">
+                  Yeni belirlediğiniz şifreler uyuşmuyor
+              </div>
+              <p>That offer has expired
+              </p></div>
+          <form method="post" action="/passChange/passChanger" class="ui form">
+              <h4 class="ui dividing header">Şifre Değiştirme</h4>
+
+              <div class="ui form">
+
+                  <div class="three fields">
+                      <div class="field">
+                          <label>Eski Şifre</label>
+                          <input type="password" name="oldPass">
+                      </div>
+                  </div>
+                  <div class="three fields">
+                      <div class="field">
+                          <label>Yeni şifre</label>
+                          <input type="password" name="newPass">
+                      </div>
+                  </div>
+                  <div class="three fields">
+                      <div class="field">
+                          <label>Yeni Şifre Tekrar</label>
+                          <input type="password" name="newPassConfirmed">
+                      </div>
+                  </div>
+
+
+                  <button class="ui primary button">
+                      Gönder
+                  </button>
+              </div>
+          </form>
+<!--          İçerik ekleme ve filtreleme Başlangıç -->
+
+</div>
+</div>
+</div>
+
+</th:block>
+
+</body>
+</html>

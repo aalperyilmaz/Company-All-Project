@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Main</title>
+  </head>
+
+  <body>
+
+  <th:block layout:fragment="content" >
+
+    <div class="pusher">
+      <div class="main-content">
+        
+        <div class="ui grid stackable padded">
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="ui right floated header red">
+                  <i class="icon shopping cart"></i>
+                </div>
+                <div class="header">
+                  <div class="ui red header">
+                    3958
+                  </div>
+                </div>
+                <div class="meta">
+                  orders
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <div class="ui red button">More Info</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column" >
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="ui right floated header green">
+                  <i class="icon clock"></i>
+                </div>
+                <div class="header">
+                  <div class="ui header green">57.6%</div>
+                </div>
+                <div class="meta">
+                  BİLGİ  
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <div class="ui green button">More Info</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="ui right floated header teal">
+                  <i class="icon briefcase"></i>
+                </div>
+                <div class="header">
+                  <div class="ui teal header">3112</div>
+                </div>
+                <div class="meta">
+                  BİLGİ
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <div class="ui teal button">More Info</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="ui right floated header purple">
+                  <i class="icon trophy"></i>
+                </div>
+                <div class="header">
+                  <div class="ui purple header">9805</div>
+                </div>
+                <div class="meta">
+                  BİLGİ
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <div class="ui purple button">More Info</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui grid stackable padded">
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile  center aligned column"
+          >
+            <div class="ui teal statistic">
+              <div class="value">
+                5,550
+              </div>
+              <div class="label">
+                Downloads
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile  center aligned column"
+          >
+            <div class="ui purple statistic">
+              <div class="value">
+                50+
+              </div>
+              <div class="label">
+                Developers
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile  center aligned column"
+          >
+            <div class="ui green statistic">
+              <div class="value">
+                800+
+              </div>
+              <div class="label">
+                Commits
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile  center aligned column"
+          >
+            <div class="ui purple statistic">
+              <div class="value">
+                1000+
+              </div>
+              <div class="label">
+                Cups of Coffee
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="ui form ui container">
+          <h4 class="ui dividing header">Shipping Information</h4>
+          <div class="field">
+            <label>Name</label>
+            <div class="two fields">
+              <div class="field">
+                <input type="text" name="shipping[first-name]" placeholder="First Name">
+              </div>
+              <div class="field">
+                <input type="text" name="shipping[last-name]" placeholder="Last Name">
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Billing Address</label>
+            <div class="fields">
+              <div class="twelve wide field">
+                <input type="text" name="shipping[address]" placeholder="Street Address">
+              </div>
+              <div class="four wide field">
+                <input type="text" name="shipping[address-2]" placeholder="Apt #">
+              </div>
+            </div>
+          </div>
+          <div class="two fields">
+            <div class="field">
+              <label>State</label>
+              <select class="ui fluid dropdown">
+                <option value="">State</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Country</label>
+              <div class="ui fluid search selection dropdown">
+                <input type="hidden" name="country">
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Country</div>
+                <div class="menu">
+            <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+            <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+          </div>
+               </div>
+            </div>
+          </div>
+          <h4 class="ui dividing header">Billing Information</h4>
+          <div class="field">
+            <label>Card Type</label>
+            <div class="ui selection dropdown">
+              <input type="hidden" name="card[type]">
+              <div class="default text">Type</div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item" data-value="visa">
+                  <i class="visa icon"></i>
+                  Visa
+                </div>
+                <div class="item" data-value="amex">
+                  <i class="amex icon"></i>
+                  American Express
+                </div>
+                <div class="item" data-value="discover">
+                  <i class="discover icon"></i>
+                  Discover
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="seven wide field">
+              <label>Card Number</label>
+              <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
+            </div>
+            <div class="three wide field">
+              <label>CVC</label>
+              <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC">
+            </div>
+            <div class="six wide field">
+              <label>Expiration</label>
+              <div class="two fields">
+                <div class="field">
+                  <select class="ui fluid search dropdown" name="card[expire-month]">
+                    <option value="">Month</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
+                </div>
+              </div>
+            </div>
+          </div>
+           <h4 class="ui dividing header">Receipt</h4>
+           <div class="field">
+            <label>Send Receipt To:</label>
+            <div class="ui fluid multiple search selection dropdown">
+              <input type="hidden" name="receipt">
+              <i class="dropdown icon"></i>
+              <div class="default text">Saved Contacts</div>
+              <div class="menu">
+                <div class="item" data-value="jenny" data-text="Jenny">
+                  <img class="ui mini avatar image" src="/images/avatar/small/jenny.jpg">
+                  Jenny Hess
+                </div>
+                <div class="item" data-value="elliot" data-text="Elliot">
+                  <img class="ui mini avatar image" src="/images/avatar/small/elliot.jpg">
+                  Elliot Fu
+                </div>
+                <div class="item" data-value="stevie" data-text="Stevie">
+                  <img class="ui mini avatar image" src="/images/avatar/small/stevie.jpg">
+                  Stevie Feliciano
+                </div>
+                <div class="item" data-value="christian" data-text="Christian">
+                  <img class="ui mini avatar image" src="/images/avatar/small/christian.jpg">
+                  Christian
+                </div>
+                <div class="item" data-value="matt" data-text="Matt">
+                  <img class="ui mini avatar image" src="/images/avatar/small/matt.jpg">
+                  Matt
+                </div>
+                <div class="item" data-value="justen" data-text="Justen">
+                  <img class="ui mini avatar image" src="/images/avatar/small/justen.jpg">
+                  Justen Kitsune
+                </div>
+              </div>
+            </div>
+          </div>
+           <div class="ui segment">
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <input type="checkbox" name="gift" tabindex="0" class="hidden">
+                <label>Do not include a receipt in the package</label>
+              </div>
+            </div>
+          </div>
+          <div class="ui button" tabindex="0">Submit Order</div>
+        </form>
+
+
+        <!--- Modal --->
+        <button class="ui button yellow create_btn" type="button" id="test">Create</button>
+
+        <div class="ui large modal">
+          <i class="close icon"></i>
+          <div class="header">
+            Profile Picture
+          </div>
+          <div class="image content">
+            <div class="ui medium image">
+              <img src="/images/avatar/large/chris.jpg">
+            </div>
+            <div class="description">
+              <div class="ui header">We've auto-chosen a profile image for you.</div>
+              <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+              <p>Is it okay to use this photo?</p>
+            </div>
+          </div>
+          <div class="actions">
+            <div class="ui black deny button">
+              Nope
+            </div>
+            <div class="ui positive right labeled icon button">
+              Yep, that's me
+              <i class="checkmark icon"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </th:block>
+
+
+  </body>
+</html>

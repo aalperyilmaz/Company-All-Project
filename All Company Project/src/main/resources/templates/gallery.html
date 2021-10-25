@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Galeri</title>
+    <script th:src="@{/sitejs/gallery.js}" ></script>
+</head>
+<body>
+<th:block layout:fragment="content" >
+
+  <div class="pusher">
+    <div class="main-content">
+
+      <div class="ui container">
+
+
+<!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+          <div class="ui hidden divider"></div>
+
+<!--          İçerik ekleme ve filtreleme Başlangıç -->
+       <div class="row">
+
+           <button  onclick="fnc2()" class="ui button yellow create_btn" type="button" id="test">Galeri Ekle</button>
+           <div class="ui black buttons right floated">
+               <div class="ui button">Seç</div>
+               <div class="ui floating dropdown icon button">
+                   <i class="dropdown icon"></i>
+                   <div class="menu">
+                       <div class="item"><i class="edit icon"></i>Aktif İçerikler</div>
+                       <div class="item"><i class="hide icon"></i>Pasif İçerikler</div>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+<!--          İçerik ekleme ve filtreleme Bitiş-->
+          <div class="ui hidden divider"></div>
+
+
+<!--          Pagination ve arama başlangıç-->
+          <div class="ui stackable ten column grid">
+
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column">
+                  <div class="right floated column">
+                      <div class="ui category search right floated">
+                          <div class="ui icon input">
+                              <input class="prompt" type="text" placeholder="Arama Yapın...">
+                              <i class="search icon"></i>
+                          </div>
+                          <div class="results"></div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+<!--          Pagination ve arama bitiş-->
+
+          <table class="ui celled padded table">
+              <thead>
+              <tr><th class="single line">Durum</th>
+                  <th>Başlık</th>
+                  <th>Açıklama</th>
+                  <th>Eklenme Tarihi</th>
+                  <th>İşlem</th>
+              </tr></thead>
+              <tbody id="tableRow">
+
+              </tbody>
+              <tfoot >
+          <tr>
+
+              <th colspan="6">
+              <div id="emp_body" class="ui right floated pagination menu">
+                  <a class="icon item">
+                      <i class="left chevron icon"></i>
+                  </a>
+
+                  <a class="icon item">
+                      <i class="right chevron icon"></i>
+                  </a>
+              </div>
+          </th>
+          </tr></tfoot>
+          </table>
+
+
+
+          <!--- Modal --->
+
+          <div class="ui  modal test" id="modalshow">
+
+                  <div class="header">Galeri</div>
+
+                  <div class="content">
+
+                      <form method="post" enctype="multipart/form-data" action="/gallery/imageUpload" class="ui form">
+
+                          <div class="field">
+                              <label>Başlık</label>
+                              <input type="text" name="galleryName" placeholder="Galeri Adı">
+                          </div>
+                          <div class="field">
+                              <label>Kategori</label>
+                              <input type="text" name="galleryComment" placeholder="Kategori">
+                          </div>
+                          <div class="field">
+                              <label>Resim</label>
+                              <input type="file"  name="imageName" multiple="multiple" >
+                          </div>
+                          <div class="field">
+                              <div class="ui checkbox">
+                                  <input type="checkbox" name="galleryStatus" tabindex="0" >
+                                  <label>Aktif</label>
+                              </div>
+                          </div>
+                          <button class="ui button" type="submit">Gönder</button>
+                      </form>
+                  </div>
+
+
+          </div>
+
+
+          <div class="ui modal tests">
+              <i class="close icon"></i>
+              <div class="header">
+                  Profile Picture
+              </div>
+
+              <div class="actions">
+                  <div class="ui black deny button">
+                      Nope
+                  </div>
+                  <div class="ui positive right labeled icon button">
+                      Yep, that's me
+                      <i class="checkmark icon"></i>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="ui modal duzenle">
+              <div class="content">
+
+                          <table id="tableModalRow">
+
+                          </table>
+
+              </div>
+
+
+
+          </div>
+
+
+      </div>
+ </div>
+
+    </div>
+
+    <script>
+        function fnc(){
+        $(function(){
+            $("#tests").click(function(){
+                $(".tests").modal('show');
+            });
+            $(".tests").modal({
+                closable: true
+            });
+        });
+        }
+
+        function fnc2(){
+            $(function(){
+                $("#test").click(function(){
+                    $(".test").modal('show');
+                });
+                $(".tests").modal({
+                    closable: true
+                });
+            });
+        }
+
+
+    </script>
+
+
+
+</th:block>
+
+</body>
+</html>
