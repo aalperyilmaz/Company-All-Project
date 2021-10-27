@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Content</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <div class="pusher">
+        <div class="main-content">
+
+            <div class="ui container">
+
+                <!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+                <div class="ui hidden divider"></div>
+
+                <!--          İçerik ekleme ve filtreleme Başlangıç -->
+                <div class="row">
+
+<!--                    <button class="ui secondary button" type="button" id="addContent">İçerik Ekle</button>-->
+
+                    <form class="ui form" method="post" action="/content/add">
+                        <div class="field">
+                            <label>İçerik Başlığı</label>
+                            <input type="text" name="contentTitle" th:value="${cu?.contentTitle}" required>
+                        </div>
+                        <div class="field">
+                            <label>Kısa Başlık</label>
+                            <input type="text" name="contentShortComment" th:value="${cu?.contentShortComment}" required>
+                        </div>
+                        <div class="field">
+                            <label>Detaylı Açıklama</label>
+                            <textarea id="editor" rows="4" name="contentLongComment" th:text="${cu?.contentLongComment}"></textarea>
+                            <script>
+                                ClassicEditor
+                                    .create( document.querySelector( '#editor' ) )
+                                    .then( editor => {
+                                        console.log( editor );
+                                    } )
+                                    .catch( error => {
+                                        console.error( error );
+                                    } );
+                            </script>
+                        </div>
+
+                        <div class="ui compact selection dropdown">
+                            <input type="hidden" name="contentStatus" th:value="${cu?.contentStatus}">
+                            <i class="dropdown icon"></i>
+                            <div class="text">Durum</div>
+                            <div class="menu">
+                                <div class="item" data-value=1>Aktif</div>
+                                <div class="item" data-value=0>Pasif</div>
+                            </div>
+                        </div>
+
+                        <button class="ui button" type="submit">Ekle</button>
+                    </form>
+
+
+
+                </div>
+
+                <!--          İçerik ekleme ve filtreleme Bitiş-->
+                <div class="ui hidden divider"></div>
+
+
+                <!--          Pagination ve arama başlangıç-->
+                <div class="ui grid">
+                    <div class="four wide column">
+                        <h4>Sayfa başına düşen içerik sayısı</h4>
+
+                    </div>
+
+                    <div class="column">
+                        <a th:text="${cpagesize}"></a>
+                    </div>
+
+
+
+
+                    <div class="column">
+
+
+                        <div class="ui scrolling dropdown">
+                            <input type="hidden" name="pageSize">
+
+                            <div class="text-input"></div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a th:href="@{'/content/list/10/0'}"
+                                   class="item" th:text="10" data-value=10>10</a>
+                                <a th:href="@{'/content/list/15/0'}"
+                                   class="item" th:text="15" data-value=15>15</a>
+                                <a th:href="@{'/content/list/25/0'}"
+                                   class="item" th:text="25" data-value=25>25</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column"></div>
+                    <div class="column"></div>
+                    <div class="column"></div>
+                    <div class="column"></div>
+
+                    <div class="two wide column">
+
+                        <div class="ui compact selection dropdown">
+                            <input type="hidden" name="contentSearch">
+                            <i class="dropdown icon"></i>
+                            <div class="text">Filtre</div>
+                            <div class="menu">
+                                <a th:href="@{'/content/filter/1'}" class="item" data-value=1>Aktif</a>
+                                <a th:href="@{'/content/filter/0'}"  class="item" data-value=0>Pasif</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="column">
+                        <div class="right floated column">
+                            <div class="ui category search right floated">
+                                <div class="ui icon input">
+                                    <input class="prompt" type="text" placeholder="Arama Yapın...">
+                                    <i class="search icon"></i>
+                                </div>
+                                <div class="results"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--          Pagination ve arama bitiş-->
+
+                <table class="ui celled padded table">
+                    <thead>
+                    <tr>
+                        <th class="single line">Content ID</th>
+                        <th>Durum</th>
+                        <th>Başlık</th>
+                        <th>Kısa Açıklama</th>
+                        <th>Detay</th>
+                        <th>Eklenme Tarihi</th>
+                        <th colspan="4">İşlemler</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iter : ${contentList}">
+                        <td><a th:href="@{'/content'}" th:text="${item.contentId}" > </a></td>
+                        <td th:if="${item.contentStatus} == 0 ">Pasif</td>
+                        <td th:if="${item.contentStatus} == 1 ">Aktif</td>
+                        <td th:text="${item.contentTitle}"> </td>
+                        <td th:text="${item.contentShortComment}"></td>
+                        <td th:utext="${item.contentLongComment}"></td>
+                        <td th:text="${item.contentAddDate}"></td>
+                        <td colspan="4"><a th:href="@{'/content/delete/'+${item.contentId}}" class="mini ui red basic button">Sil</a>
+                        <a th:href="@{'/content/update/'+${item.contentId}}" class="mini ui violet basic button">Düzenle</a></td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="8">
+                            <div class="ui grid">
+
+                                <li th:if="${cpagesize}==10" class="item"
+                                    th:each="i:${#numbers.sequence(0,contentList.size()/10)}">
+                                    <a class="page-link"
+                                       th:href="@{'/content/list/10/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                                <li th:if="${cpagesize}==15" class="item"
+                                    th:each="i:${#numbers.sequence(0,contentList.size()/15)}">
+                                    <a class="page-link"
+                                       th:href="@{'/content/list/15/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                                <li th:if="${cpagesize}==25" class="item"
+                                    th:each="i:${#numbers.sequence(0,contentList.size()/25)}">
+                                    <a class="page-link"
+                                       th:href="@{'/content/list/25/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                            </div>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</th:block>
+
+</body>
+
+</html>

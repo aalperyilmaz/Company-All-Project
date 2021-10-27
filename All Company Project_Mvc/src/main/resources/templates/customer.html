@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Customer</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="pusher">
+        <div class="main-content">
+
+            <div class="ui container">
+
+                <!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+                <div class="ui hidden divider"></div>
+
+                <!--          Pagination ve arama başlangıç-->
+                <div class="ui grid">
+                    <div class="three wide column">
+
+                        <a th:href="@{'/customerAdd'}" class="small ui secondary button">
+                            Müşteri Ekle
+                        </a>
+
+                    </div>
+                    <div class="four wide column">
+                        <h4>Sayfa başına düşen müşteri sayısı</h4>
+
+                    </div>
+
+                    <div class="column">
+                        <a th:text="${cuspagesize}"></a>
+                    </div>
+
+
+
+
+                    <div class="column">
+
+
+                        <div class="ui scrolling dropdown">
+                            <input type="hidden" name="pageSize">
+
+                            <div class="text-input"></div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a th:href="@{'/customer/list/10/0'}"
+                                   class="item" th:text="10" data-value=10>10</a>
+                                <a th:href="@{'/customer/list/15/0'}"
+                                   class="item" th:text="15" data-value=15>15</a>
+                                <a th:href="@{'/customer/list/25/0'}"
+                                   class="item" th:text="25" data-value=25>25</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column"></div>
+                    <div class="column"></div>
+                    <div class="column"></div>
+
+
+
+
+                    <div class="column">
+                        <div class="right floated column">
+                            <div class="ui category search right floated">
+                                <div class="ui icon input">
+                                    <input class="prompt" type="text" placeholder="Arama Yapın...">
+                                    <i class="search icon"></i>
+                                </div>
+                                <div class="results"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--          Pagination ve arama bitiş-->
+
+                <table class="ui celled padded table">
+                    <thead>
+                    <tr>
+                        <th class="single line">Customer ID</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Mail</th>
+                        <th>Telefon</th>
+                        <th>Durumu</th>
+                        <th>Ban / Sil</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iter : ${customerList}">
+                        <td th:text="${item.customerId}"></td>
+                        <td th:text="${item.customerName}"></td>
+                        <td th:text="${item.customerSurname}"></td>
+                        <td th:text="${item.customerMail}"></td>
+                        <td th:text="${item.customerPhone}"></td>
+                        <td th:if="${item.customerStatus} == 0 ">Ban</td>
+                        <td th:if="${item.customerStatus} == 1 ">Aktif</td>
+                        <td colspan="4"><a th:href="@{'/customer/ban/'+${item.customerId}}" class="mini ui red basic button">Ban/Ban Kaldır</a>
+                            <a th:href="@{'/customer/delete/'+${item.customerId}}" class="mini ui violet basic button">Sil</a>
+                            <a th:href="@{'/customerAdd/update/'+${item.customerId}}" class="mini ui orange basic button">Düzenle</a></td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="8">
+                            <div class="ui grid">
+
+                                <li th:if="${cuspagesize}==10" th:value="${totalCustomer}" class="item"
+                                    th:each="i:${#numbers.sequence(0,totalCustomer/10)}">
+                                    <a class="page-link"
+                                       th:href="@{'/customer/list/10/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                                <li th:if="${cuspagesize}==15" th:value="${totalCustomer}" class="item"
+                                    th:each="i:${#numbers.sequence(0,totalCustomer/15)}">
+                                    <a class="page-link"
+                                       th:href="@{'/customer/list/15/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                                <li th:if="${cuspagesize}==25" th:value="${totalCustomer}" class="item"
+                                    th:each="i:${#numbers.sequence(0,totalCustomer/25)}">
+                                    <a class="page-link"
+                                       th:href="@{'/customer/list/25/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                            </div>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

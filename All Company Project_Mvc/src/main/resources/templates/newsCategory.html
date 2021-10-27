@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>News Category</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <div class="pusher">
+        <div class="main-content">
+
+            <div class="ui container">
+
+                <div class="ui hidden divider"></div>
+
+                <div class="ui grid">
+
+                    <div class="four wide column"></div>
+                    <div class="eight wide column">
+
+
+                        <form method="post" action="/newsCategory/add" class="ui form">
+                            <h3 class="ui center aligned block header">Kategori Ekleme</h3>
+                            <div class="field">
+                                <label for="newsCategoryName">Kategori İsmi</label>
+                                <input type="text" name="newsCategoryName" id="newsCategoryName"
+                                       th:value="${nCU?.newsCategoryName}">
+
+                            </div>
+
+                            <button class="ui button" type="submit">Ekle</button>
+                        </form>
+
+                        <div class="ui hidden divider"></div>
+
+                        <div class="row">
+                            <div class="ui grid">
+                                <div class="eight wide column">
+                                    <h4>Sayfa başına düşen kategori sayısı </h4>
+
+                                </div>
+
+                                <div class="column">   <a th:text="${pagesize}"></a> </div>
+
+                                <div class="column">
+
+
+                                    <div class="ui scrolling dropdown">
+                                        <input type="hidden" name="pageSize">
+
+                                        <div class="text-input"></div>
+                                        <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                            <a th:href="@{'/newsCategory/list/10/0'}"
+                                               class="item" th:text="10" data-value=10>10</a>
+                                            <a th:href="@{'/newsCategory/list/15/0'}"
+                                               class="item" th:text="15" data-value=15>15</a>
+                                            <a th:href="@{'/newsCategory/list/25/0'}"
+                                               class="item" th:text="25" data-value=25>25</a>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <table class="ui celled padded table">
+                            <thead>
+                            <tr>
+                                <th class="single line">Content ID</th>
+                                <th>Kategori İsmi</th>
+                                <th colspan="4">İşlemler</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item, iter : ${newsCategoryList}">
+                                <td th:text="${item.newsCategoryId}"></td>
+                                <td th:text="${item.newsCategoryName}"></td>
+                                <td colspan="4">
+                                    <a th:href="@{'/newsCategory/delete/'+${item.newsCategoryId}}"
+                                       class="mini ui red basic button">Sil</a>
+                                    <a th:href="@{'/newsCategory/update/'+${item.newsCategoryId}}"
+                                       class="mini ui violet basic button">Düzenle</a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                            <tfoot>
+                            <tr>
+                                <th colspan="8">
+                                    <div class="ui grid">
+
+                                        <li  th:if="${pagesize}==10" th:value="${totalPage}" class="item"
+                                             th:each="i:${#numbers.sequence(0,totalPage/10)}">
+                                            <a class="page-link"
+                                               th:href="@{'/newsCategory/list/10/'+${i}}"
+                                               th:text="${i}"></a></li>
+
+                                        <li th:if="${pagesize}==15" th:value="${totalPage}" class="item"
+                                            th:each="i:${#numbers.sequence(0,totalPage/15)}">
+                                            <a class="page-link"
+                                               th:href="@{'/newsCategory/list/15/'+${i}}"
+                                               th:text="${i}"></a></li>
+
+                                        <li th:if="${pagesize}==25" th:value="${totalPage}" class="item"
+                                            th:each="i:${#numbers.sequence(0,totalPage/25)}">
+                                            <a class="page-link"
+                                               th:href="@{'/newsCategory/list/25/'+${i}}"
+                                               th:text="${i}"></a></li>
+
+                                    </div>
+
+                                </th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="four wide column"></div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
+</body>
+</html>

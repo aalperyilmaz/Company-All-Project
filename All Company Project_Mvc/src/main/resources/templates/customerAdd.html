@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Customer Headt</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="pusher">
+        <div class="main-content">
+
+            <div class="ui container">
+                <div class="ui hidden divider"></div>
+                <!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+                <h3>Müşteri Ekleme</h3>
+                <div class="ui hidden divider"></div>
+                <div class="row">
+
+                    <!--                    <button class="ui secondary button" type="button" id="addContent">İçerik Ekle</button>-->
+
+                    <form class="ui form" method="post" action="/customerAdd/add">
+                        <div class="ui grid">
+
+                            <div class="row">
+
+                                <div class="eight wide column">
+                                    <div class="field">
+                                        <label>İsim</label>
+                                        <input type="text" name="customerName"
+                                               th:value="${customerUpdate?.customerName}" required>
+                                        <div class="ui red message" th:if="${ #fields.hasErrors('customerName') }" th:errors="*{customerName}"></div>
+                                    </div>
+                                </div>
+
+                                <div class="eight wide column">
+                                    <div class="field">
+                                        <label>Soyisim</label>
+                                        <input type="text" name="customerSurname" th:value="${customerUpdate?.customerSurname}" required>
+                                        <div class="ui red message" th:if="${ #fields.hasErrors('customerSurname') }" th:errors="*{customerSurname}"></div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="eight wide column">
+                                    <div class="field">
+                                        <label>Email</label>
+                                        <input type="email" name="customerMail" th:value="${customerUpdate?.customerMail}" required>
+                                        <div class="ui red message" th:if="${ #fields.hasErrors('customerMail') }" th:errors="*{customerMail}"></div>
+
+                                    </div>
+                                </div>
+
+                                <div class="eight wide column">
+                                    <div class="field">
+                                        <label>Telefon</label>
+                                        <input type="number" name="customerPhone"
+                                               th:value="${customerUpdate?.customerPhone}"
+                                               required>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="eight wide column">
+                                    <div class="field">
+                                        <label>Şifre</label>
+                                        <input type="password" name="password" th:value="${customerUpdate?.password}" required>
+                                        <div class="ui red message" th:if="${ #fields.hasErrors('password') }" th:errors="*{password}"></div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 22px"
+                                     class="ui two wide column">
+
+
+                                    <div class="ui two wide column">
+                                        <div class="ui compact selection dropdown">
+
+                                            <input type="hidden" name="customerStatus"
+                                                   th:value="${customerUpdate?.customerStatus}" required>
+                                            <i class="dropdown icon"></i>
+                                            <div class="text">Durum</div>
+                                            <div class="menu">
+                                                <div class="item" data-value=1>Aktif</div>
+                                                <div class="item" data-value=0>Pasif</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 22px"
+                                     class="ui two wide column">
+
+                                    <div class="ui two wide column">
+
+                                        <button class="ui button" type="submit">Ekle</button>
+                                    </div>
+                                </div>
+
+
+                                <div style="margin-top: 22px"
+                                     class="ui two wide column">
+                                    <div class="ui two wide column">
+
+                                        <a href="/customer" class="ui button" type="submit">İptal</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+                <div class="ui hidden divider"></div>
+
+                <h3>Kayıtlı Müşteriye Adres Ekleme</h3>
+                <div class="ui hidden divider"></div>
+
+                <form class="ui form" method="post" action="/customerAdd/address/add">
+
+                    <div class="row">
+
+                        <div class="eight wide column">
+                            <div class="field">
+                                <label>Adres</label>
+                                <textarea type="text" rows="3" name="adressName" required></textarea>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="ui hidden divider"></div>
+                  <div class="ui grid">
+
+
+                            <div class="four wide column">
+                            <select class="ui search dropdown" id="customer" name="customer">
+                                <option value="">Müşteri Seçiniz</option>
+                                <option th:each="item, iter : ${customerList}" th:value="${item.customerId}" th:text="${item.customerName}+ ' ' +${item.customerSurname}"></option>
+                            </select>
+                            </div>
+
+
+                              <div class="two wide column">
+
+                                    <button class="ui button" type="submit">Ekle</button>
+
+                            </div>
+
+
+                            <div class="two wide column">
+
+                                    <a href="/customer" class="ui button" type="submit">İptal</a>
+
+                           </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+</th:block>
+</body>
+</html>

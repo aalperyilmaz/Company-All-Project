@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>News</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="pusher">
+        <div class="main-content">
+            <div class="ui container">
+                <div class="ui hidden divider"></div>
+
+                <div class="ui seven column grid">
+                    <div class="column">
+
+                        <a th:href="@{'/newsAdd'}" class="ui secondary button">
+                            Haber Ekle
+                        </a>
+
+                    </div>
+
+
+                    <div class="column">
+
+                        <a th:href="@{'/newsCategory'}" class="ui secondary button">
+                            Kategori Ekle
+                        </a>
+
+                    </div>
+                    <div class="column"></div>
+                    <div class="column"></div>
+                    <div class="column"></div>
+
+                    <div class="three wide column">
+
+                <form method="get" action="/news/filter">
+
+
+                        <select class="ui search dropdown" name="newsStatusSearch">
+
+                            <option value=0>Pasif</option>
+                            <option value=1>Aktif</option>
+
+
+                        </select>
+
+
+
+
+
+                        <select class="ui search dropdown" name="searchCatId">
+                            <option value="">Kategori Seçiniz</option>
+                            <option th:each="item, iter : ${newsCategoryList}" th:value="${item.newsCategoryId}" th:text="${item.newsCategoryName}"></option>
+                        </select>
+
+
+
+                        <button type="submit" class="ui secondary right floated button" >
+                            Seç
+                        </button>
+
+                </form>
+                    </div>
+                </div>
+
+
+                <div class="ui grid">
+                <div class="four wide column">
+                    <h4>Sayfa başına düşen haber sayısı </h4>
+
+                </div>
+                <div class="column">
+                <a th:text="${newspagesize}"></a>
+                </div>
+
+
+
+                <div class="column">
+
+
+                    <div class="ui scrolling dropdown">
+                        <input type="hidden" name="pageSize">
+
+                        <div class="text-input"></div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a th:href="@{'/news/list/10/0'}"
+                               class="item" th:text="10" data-value=10>10</a>
+                            <a th:href="@{'/news/list/15/0'}"
+                               class="item" th:text="15" data-value=15>15</a>
+                            <a th:href="@{'/news/list/25/0'}"
+                               class="item" th:text="25" data-value=25>25</a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                </div>
+                <table class="ui celled padded table">
+                    <thead>
+                    <tr>
+                        <th class="single line">New ID</th>
+                        <th>Kategori</th>
+                        <th>Durum</th>
+                        <th>Resim</th>
+                        <th>Eklenme Tarihi</th>
+                        <th colspan="4">İşlemler</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iter : ${newsList}">
+                        <td><a th:href="@{'/news'}" th:text="${item.newsId}"></a></td>
+                        <td><a th:each="itm:${item.newsCategories}" th:text="${itm.newsCategoryName}"> </a></td>
+                        <td th:if="${item.newsStatus} == true">Aktif</td>
+                        <td th:if="${item.newsStatus} == false">Pasif</td>
+                        <td><img th:src="@{ 'uploads/' + ${item.newsImageUrl} }" alt="" height=100 width=100></td>
+                        <td th:text="${item.getNewsAddDate()}"></td>
+                        <td colspan="4"><a th:href="@{'/news/delete/'+${item.newsId}}" class="mini ui red basic button">Sil</a>
+                            <a th:href="@{'/newsAdd/update/'+${item.newsId}}" class="mini ui violet basic button">Düzenle</a></td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="8">
+                            <div class="ui grid">
+
+
+                                <li th:if="${newspagesize}==10" th:value="${totalNews}" class="item"
+                                    th:each="i:${#numbers.sequence(0,totalNews/10)}">
+                                    <a class="page-link"
+                                       th:href="@{'/news/list/10/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                                <li th:if="${newspagesize}==15" th:value="${totalNews}" class="item"
+                                    th:each="i:${#numbers.sequence(0,totalNews/15)}">
+                                    <a class="page-link"
+                                       th:href="@{'/news/list/15/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                                <li th:if="${newspagesize}==25" th:value="${totalNews}" class="item"
+                                    th:each="i:${#numbers.sequence(0,totalNews/25)}">
+                                    <a class="page-link"
+                                       th:href="@{'/news/list/25/'+${i}}"
+                                       th:text="${i}"></a></li>
+
+                            </div>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

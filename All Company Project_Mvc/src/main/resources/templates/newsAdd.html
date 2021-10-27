@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>News Add</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <div class="pusher">
+        <div class="main-content">
+            <div class="ui container">
+                <div class="ui hidden divider"></div>
+                <form class="ui form" method="post" enctype="multipart/form-data" action="/newsAdd/add">
+                    <div class="field">
+                        <label>Haber Başlığı</label>
+                        <input type="text" name="newsTitle" th:value="${newsUpdate.newsTitle}" required/>
+                    </div>
+                    <div class="field">
+                        <label>Kısa Açıklama</label>
+                        <input type="text" name="newsShortComment" th:value="${newsUpdate.newsShortComment}" required/>
+                    </div>
+                    <div class="field">
+                        <label>Detaylı Açıklama</label>
+                        <textarea id="editor" name="newsLongComment" th:text="${newsUpdate.newsLongComment}"></textarea>
+                        <script>
+                            ClassicEditor
+                                .create( document.querySelector( '#editor' ) )
+                                .then( editor => {
+                                    console.log( editor );
+                                } )
+                                .catch( error => {
+                                    console.error( error );
+                                } );
+                        </script>
+                    </div>
+
+
+                    <div class="field">
+                    <input type="file" multiple="multiple" th:value="${newsUpdate.newsImageUrl}" accept="image/*" name="newsImageUrl"/>
+
+                    </div>
+
+
+                    <div class="ui compact selection dropdown">
+                        <input type="hidden" name="newsStatus" th:value="${newsUpdate.newsStatus}">
+                        <i class="dropdown icon"></i>
+                        <div class="text">Durum</div>
+                        <div class="menu">
+                            <div class="item" data-value=1>Aktif</div>
+                            <div class="item" data-value=0>Pasif</div>
+                        </div>
+                    </div>
+
+                    <select class="ui search dropdown" name="newsCategories">
+                        <option value="">Kategori Seçiniz</option>
+                        <option th:each="item, iter : ${newsAddCategoryList}" th:value="${item.newsCategoryId}" th:text="${item.newsCategoryName}"></option>
+                    </select>
+<!--                        İptal'e href atamayı unutma -->
+                    <button class="ui button" type="submit">Ekle</button>
+                    <a href="/news" class="ui button" type="button">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</body>
+</html>

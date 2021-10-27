@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Anket</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <div class="pusher">
+        <div class="main-content">
+            <div class="ui container">
+
+                <!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+                <div class="ui hidden divider"></div>
+
+
+                <!--          İçerik ekleme ve filtreleme Bitiş-->
+                <div class="ui hidden divider"></div>
+
+                <!--          Pagination ve arama bitiş-->
+
+
+                <div class="ui two column grid">
+                    <div class="column">
+                        <div class="ui segment">
+                            <table class="ui celled padded table">
+                                <thead>
+                                <tr>
+                                    <th class="single line">Id</th>
+                                    <th>Başlık</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tableRow">
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="6">
+                                        <div id="emp_body" class="ui right floated pagination menu">
+                                            <a class="icon item">
+                                                <i class="left chevron icon"></i>
+                                            </a>
+
+                                            <a class="icon item">
+                                                <i class="right chevron icon"></i>
+                                            </a>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui segment">
+                            Anket Oluştur
+                            <form method="post" action="/survey/add">
+                                <div class="ui form">
+                                    <div class="ui hidden divider"></div>
+                                    <div class="field">
+                                        <label>Anket Adı</label>
+                                        <input type="text" name="surveyTitle">
+                                    </div>
+                                    <button type="submit" class="ui positive right labeled icon button">
+                                        Anketi Oluştur
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="ui segment">
+                            Ankete Seçenek Ekle
+                            <form method="post" action="/survey/optionadd">
+                                <div class="ui form">
+                                    <div class="ui hidden divider"></div>
+                                    <div class="field">
+                                        <label>Anket Seç</label>
+                                        <select class="ui search dropdown" id="surveyId" name="surveyId">
+                                            <option th:each="item, iter : ${surveys}" th:value="${item.surveyId}"
+                                                    th:text="${item.surveyTitle}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label>Eklenecek Seçenek</label>
+                                        <input type="text" name="surveyOptionsTitle">
+                                    </div>
+                                    <button type="submit" class="ui positive right labeled icon button">
+                                        Anket Seçeği Ekle
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ui modal surveyoptions">
+        <table class="ui celled padded table">
+            <thead>
+            <tr>
+                <th class="single line">Anket Başlığı</th>
+                <th>Anket Seçeneği</th>
+                <th>Aydığı Oy Toplamı</th>
+            </tr>
+            </thead>
+            <tbody id="tableRow2">
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="6">
+                    <div id="emp_body" class="ui right floated pagination menu">
+                        <a class="icon item">
+                            <i class="left chevron icon"></i>
+                        </a>
+
+                        <a class="icon item">
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script>
+        function fnc() {
+            $(function () {
+                $("#tests").click(function () {
+                    $(".tests").modal('show');
+                });
+                $(".tests").modal({
+                    closable: true
+                });
+            });
+        }
+
+        function fnc2() {
+            $(function () {
+                $("#test").click(function () {
+                    $(".test").modal('show');
+                });
+                $(".tests").modal({
+                    closable: true
+                });
+            });
+        }
+
+
+    </script>
+
+    <script th:src="@{/sitejs/survey.js}"></script>
+
+</th:block>
+
+</body>
+</html>

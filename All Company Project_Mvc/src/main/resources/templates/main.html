@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Main</title>
+  </head>
+
+  <body>
+
+  <th:block layout:fragment="content" >
+
+    <div class="pusher">
+      <div class="main-content">
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+
+        <div class="ui grid stackable padded">
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header red">
+                  <i class="icon box"></i>
+                </div>
+                <div class="header">
+                  <div class="ui red header">
+                    <h1>ÜRÜNLER YÖNETİMİ</h1>
+                  </div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam Ürünler : <a th:text="${prodCount}"></a></h3>
+
+
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a href="http://localhost:8090/product" class="ui red button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column" >
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header green">
+                  <i class="icon thumbs up"></i>
+
+                </div>
+                <div class="header">
+                  <div class="ui header green">
+                    <h1>BEĞENİ YÖNETİMİ</h1>
+                  </div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam Ürünler : <a th:text="${sayi}"></a></h3>
+
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a href="http://localhost:8090/product" class="ui green button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header olive">
+                  <i class="icon file alternate"></i>
+                </div>
+                <div class="header">
+                  <div class="ui olive header"><h1>İÇERİK YÖNETİMİ</h1></div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam İçerik : <a th:text="${contentCount}"></a></h3>
+
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a href="http://localhost:8090/content" class="ui olive button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header purple">
+                  <i class="icon newspaper outline"></i>
+                </div>
+                <div class="header">
+                  <div class="ui purple header">
+                    <h1>HABER YÖNETİMİ</h1>
+                  </div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam Haber : <a th:text="${newsCount}"></a></h3>
+
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a href="http://localhost:8090/news" class="ui purple button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui hidden divider"></div>
+
+
+        <div class="ui grid stackable padded">
+          <div
+                  class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header violet">
+                  <i class="icon shopping cart"></i>
+                </div>
+                <div class="header">
+                  <div class="ui violet header">
+                    <h1>SİPARİŞ YÖNETİMİ</h1>
+                  </div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam Sipariş : <a th:text="${ordersCount}"></a></h3>
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a href="http://localhost:8090/orders" class="ui violet button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+                  class="four wide computer eight wide tablet sixteen wide mobile column" >
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header orange">
+                  <i class="icon users"></i>
+
+                </div>
+                <div class="header">
+                  <div class="ui header orange"><h1>MÜŞTERİ YÖNETİMİ</h1></div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam Müşteri : <a th:text="${cusCount}"></a></h3></div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a href="http://localhost:8090/customer" class="ui orange button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+                  class="four wide computer eight wide tablet sixteen wide mobile column"
+          >
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header teal">
+                  <i class="icon question circle"></i>
+                </div>
+                <div class="header">
+                  <div class="ui teal header"><h1>ANKET YÖNETİMİ</h1></div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam Ürünler : <a th:text="${sayi}"></a></h3></div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a class="ui teal button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+                  class="four wide computer eight wide tablet sixteen wide mobile column">
+            <div class="ui card">
+              <div class="content">
+                <div class="ui right floated header yellow">
+                  <i class="icon bullhorn"></i>
+                </div>
+                <div class="header">
+                  <div class="ui yellow header"><h1>DUYURU YÖNETİMİ</h1></div>
+                </div>
+                <div class="meta">
+
+                </div>
+                <div class="description">
+                  <h3> Toplam Duyuru : <a th:text="${anCount}"></a></h3>
+                </div>
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <a href="http://localhost:8090/announce" class="ui yellow button">GİT</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </th:block>
+
+
+  </body>
+</html>

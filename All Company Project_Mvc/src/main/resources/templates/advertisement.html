@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/inc/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Reklam</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <div class="pusher">
+        <div class="main-content">
+
+            <div class="ui container">
+
+
+                <!--          ui hidden divider margin top veya margin bottom gibi çalışır -->
+                <div class="ui hidden divider"></div>
+
+                <!--          İçerik ekleme ve filtreleme Başlangıç -->
+                <div class="row">
+
+                    <button onclick="fnc2()" class="ui button yellow create_btn" type="button" id="test">Reklam Ekle
+                    </button>
+
+                </div>
+
+                <!--          İçerik ekleme ve filtreleme Bitiş-->
+                <div class="ui hidden divider"></div>
+
+
+                <!--          Pagination ve arama başlangıç-->
+                <div class="ui stackable four column grid">
+
+
+                </div>
+                <!--          Pagination ve arama bitiş-->
+
+                <table class="ui celled padded table">
+                    <thead>
+                    <tr>
+                        <th class="single line">Id</th>
+                        <th>Adı</th>
+                        <th>Başlama Tarihi</th>
+                        <th>Bitiş Tarihi</th>
+                        <th>Resmi</th>
+                        <th>Link</th>
+                        <th>Kontroller</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableRow">
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+
+                        <th colspan="6">
+                            <div id="emp_body" class="ui right floated pagination menu">
+                                <a class="icon item">
+                                    <i class="left chevron icon"></i>
+                                </a>
+
+                                <a class="icon item">
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+                <!--- Modal Add --->
+                <div class="ui tiny modal test" id="as">
+                    <div class="header">
+                        Reklam Ekle
+                    </div>
+                    <form method="post" action="/advertisement/add">
+                        <div class="ui form">
+                            <div class="ui hidden divider"></div>
+                                <div class="field">
+                                    <label>Reklam Adı</label>
+                                    <input type="text" name="advertisementName">
+                                </div>
+                                <div class="ui hidden divider"></div>
+                                <div class="field">
+                                    <label>Reklam Gösterim Sayısı</label>
+                                    <input type="number" name="advertisementPresentationWatchSize">
+                                </div>
+                                <div class="ui hidden divider"></div>
+                                <div class="field">
+                                    <label>Başlangıç Tarihi</label>
+                                    <input type="date" name="advertisementStartDate">
+                                </div>
+                                <div class="ui hidden divider"></div>
+                                <div class="field">
+                                    <label>Bitiş Tarihi</label>
+                                    <input type="date" name="advertisementEndDate">
+                                </div>
+                                <div class="ui hidden divider"></div>
+                                <div class="field">
+                                    <label>Reklam Resmi</label>
+                                    <input type="file" name="advertisementImageUrl">
+                                </div>
+                                <div class="ui hidden divider"></div>
+                                <div class="field">
+                                    <label>Reklam Genişlik</label>
+                                    <input type="text" name="advertisementHeight"></input>
+                                </div>
+                                <div class="ui hidden divider"></div>
+                                <div class="field ">
+                                    <label>Reklam Yükseklik</label>
+                                    <input type="number" name="advertisementWidth">
+                                </div>
+                                <div class="field ">
+                                    <label>Reklam Link</label>
+                                    <input type="number" name="advertisementLink">
+                                </div>
+                        </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="actions">
+                                <div class="ui black deny button">
+                                    Kapat
+                                </div>
+                                <button type="submit" class="ui positive right labeled icon button">
+                                    Gönder
+                                    <i class="checkmark icon"></i>
+                                </button>
+                            </div>
+                </form>
+                </div>
+
+
+                <!--- Modal Update --->
+                <div class="ui modal update">
+                    <i class="close icon"></i>
+                    <form method="POST" id="update">
+                        <div class="ui form">
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <label>Reklam Adı</label>
+                                <input type="text" name="advertisementName" id="advertisementName">
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <label>Reklam Gösterim Sayısı</label>
+                                <input type="text" name="advertisementPresentationWatchSize"
+                                       id="advertisementPresentationWatchSize">
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <label>Başlangıç Tarihi</label>
+                                <input type="date" name="advertisementStartDate" id="advertisementStartDate">
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <label>Bitiş Tarihi</label>
+                                <input type="date" name="advertisementEndDate" id="advertisementEndDate">
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <label>Reklam Adı</label>
+                                <input type="file" name="advertisementImageUrl" id="advertisementImageUrl">
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field">
+                                <label>Reklam Genişlik</label>
+                                <input type="text" name="advertisementHeight" id="advertisementHeight"></input>
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div class="field ">
+                                <label>Reklam Yükseklik</label>
+                                <input type="number" name="advertisementWidth" id="advertisementWidth">
+                            </div>
+                            <div class="field ">
+                                <label>Reklam Link</label>
+                                <input type="text" name="advertisementLink" id="advertisementLink">
+                            </div>
+                        </div>
+                        <div class="ui hidden divider"></div>
+                        <div class="actions">
+                            <div class="ui black deny button">
+                                Kapat
+                            </div>
+                            <button type="submit" class="ui positive right labeled icon button">
+                                Düzenle
+                                <i class="checkmark icon"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function fnc() {
+            $(function () {
+                $("#tests").click(function () {
+                    $(".tests").modal('show');
+                });
+                $(".tests").modal({
+                    closable: true
+                });
+            });
+        }
+
+        function fnc2() {
+            $(function () {
+                $("#test").click(function () {
+                    $(".test").modal('show');
+                });
+                $(".tests").modal({
+                    closable: true
+                });
+            });
+        }
+
+
+    </script>
+
+    <script th:src="@{/sitejs/advertisement.js}"></script>
+
+</th:block>
+
+</body>
+</html>
